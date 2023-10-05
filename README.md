@@ -15,7 +15,4 @@ Run the project using `mvn spring-boot:run`
 | ADMIN, STUDENT 	 | _admin_    	      | _passwd_   	 |
 
 ## Authors
-* Lukas Geisler
 * Elizaveta Terente
-* Helin Hatun Kal
-* Luca Rahm
