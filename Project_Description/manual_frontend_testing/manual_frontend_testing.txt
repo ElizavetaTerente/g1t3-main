@@ -1,0 +1,100 @@
+Manual frontend testing:
+
+--------as STUDENT--------
+
+----main view----
+-"add new deck" button ☑
+     - "close" button (in add new deck form) ☑
+-search deck feature ☑
+-"public decks" button ☑
+- logout button ☑
+-user sees table with his decks ☑
+-feature to sort deck table by name,description, #new cards, #cards to repeatin 2 directions(button ^ and ⌄) ☑
+-clicking green button with deck name goes to study mode ☑
+-"see detailed view" button ☑
+
+----detailed view of a deck----
+-users sees deck name and description ☑
+-"inverse mode" button changes question and solution of a cards (to return user can inverse one more time) ☑ 
+- "edit deck" button ☑
+- "save changes" button (appears after clicking "edit deck") ☑
+- "publish deck" button ☑
+     -if deck published shows message about success ☑
+     -if this deck is already published shows corresponding message ☑
+- "delete deck" button : deletes deck,shows corresponding message and forwarding to student main page ☑
+- "main" button : forwarding to student main page ☑
+- user sees cards of chosen deck ☑
+- search question feature ☑
+- feature to sort card table by question and solution in 2 directions(button ^ and ⌄) ☑
+- "add new card" button ☑
+     - "close" button (in add new card form) ☑
+- "delete" (card) button ☑
+- "edit" (card) button ☑
+- "save" (card) button - appears after user clicks on a button "edit" ☑
+----Study mode view----
+- User sees # cards to repeat and # new cards ☑
+- User sees qustion  ☑
+- If users clicks on question he sees back side - answer  ☑
+- "Rate your answer" buttons (6 variants to estimate your answer)  ☑
+- after rating card users sees next card and updates # cards to repeat and # new cards ☑
+- when user run out cards to study he sees corresponding message  ☑
+- "main" button : return to student main page ☑
+----Public decks view----
+- "main" button : return to student main page ☑
+- User sees public decks table  ☑
+- search deck feature ☑
+- feature to sort deck table by name and description in 2 directions(button ^ and ⌄) ☑
+- study mode button disabled(because user can study public deck only after adding it to his decks) ☑
+      -- when user touches with cursor this button then he sees corresponding message ☑
+- "see Detailed Viesw" : shows deck info and cards but without possibility to edit ☑
+- "add to my decks" button : adding deck to user's decks ☑
+     -if deck added shows message about success ☑
+     -if this deck is already in user's decks show corresponding message ☑
+
+--------as ADMIN--------
+
+----main view----
+-"public decks" button ☑
+- logout button ☑
+- "add new user" button ☑
+     - "close" button (in add new deck form) ☑
+     - if trying to submit without some (or all values) corresponding message is shown ☑
+     - if trying to submit with username which already exists corresponding message is shown ☑
+- search user feature ☑
+- feature to sort users table by username, last name and first name in 2 directions(button ^ and ⌄) ☑
+- "delete" (user) button ☑
+- "edit" (user) button ☑
+- "save" (user) button - appears after user clicks on a button "edit" ☑
+----Public decks view----
+- "main" button : return to admin main page  ☑
+- User sees public decks table (but without himself,because he cannot edit his info(other admins can)) ☑
+- search deck feature ☑
+- feature to sort deck table by name and description in 2 directions(button ^ and ⌄) ☑
+- "see Detailed View" : shows deck info and cards but without possibility to edit ☑
+- "block" button : blocks deck (nobody can see it including user who owned it) ☑
+
+--------as STUDENT-ADMIN--------
+
+----main view----
+- sees admin main page ☑
+*** same functionality as in ADMIN described ***
+- "student mode" button : forworting to student main page ☑
+     - from student mode "admin mode" button appears : return to admin main page ☑
+*** same functionality as in ADMIN described ***
+
+--------SECURITY--------
+
+----main view url : http://localhost:8080/student/index.html----
+- if users tries to access something in admin folder (/admin) by changing url in browser show 403 custom erorr page ☑
+
+----pblic decks view url : http://localhost:8080/public/publicDecks.html?admin=false
+- if user tries to change parameter in url to admin=true in browser show 403 custom erorr page ☑
+
+----detailed view of a deck url: http://localhost:8080/student/detailedViewOfADeck.html?id=1&public=true
+- if user changes url parameter "pablic" to "false" (which can give him opportunity to edit public deck)
+check if it is his deck and if not show 403 custom erorr page ☑
+- if user try to change "id" of a deck in url show 403 custom erorr page ☒ (but info also not shown)
+
+
+ 
+

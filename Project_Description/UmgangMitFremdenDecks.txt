@@ -1,0 +1,7 @@
+Umgang mit Fremden Decks
+
+1.Es existiert eine Datenbank in., der alle öffentlichen Decks gespeichert sind.
+In dieser können Decks gesucht werden und hinzugefügt werden von einem User.
+Außerdem können User sich Decks andere Decks speicher(lokal) und verwenden.
+Der Allgorithmus wird für Jeden User zurückgestezt, damit der Schwierigkeitsgrad
+ für Jeden Individell angepasst werden kann.

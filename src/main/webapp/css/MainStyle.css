@@ -1,0 +1,38 @@
+.arrow {
+    float: right;
+    transition: transform .3s;
+}
+
+#collapseExample.show .arrow {
+    transform: rotate(180deg);
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 10px 20px; /* horizontal and vertical spacing */
+}
+
+th, td {
+    border: 1px solid black; /* or any other value */
+}
+h1 {
+    text-align: center;
+    margin: 0 auto;
+
+}
+
+#inverse_mode_button, #edit_button, #publish_button, #delete_button {
+    display: block;
+}
+form {
+    display: flex; /* use flex layout to position the button next to the input field */
+}
+
+#search-input {
+    flex: 1; /* take up all available space in the form */
+}
+
+#search-button {
+    margin-left: 10px; /* add a margin between the input field and the button */
+}
+

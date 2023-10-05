@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html data-ng-app="app" lang="en">
+<head>
+    <link rel="MainStyle" type="text/css" href="../css/MainStyle.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="../index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <title>MEMORI</title>
+</head>
+<body>
+
+<div class="container" data-ng-controller ="mainView">
+    <h1>MEMORI </h1>
+
+    <div class="card">
+        <div class="card-header">
+            <div class="col-md-12 bg-light text-right">
+
+                <div class="btn-group">
+                    <a id = "adminModeButton" href="http://localhost:8080/admin/index.html" class="btn btn-outline-primary" role="button">admin mode</a>
+                </div>
+                <div class="btn-group">
+                    <a href="http://localhost:8080/public/publicDecks.html?admin=false" class="btn btn-primary ml-2" role="button">public decks</a>
+                </div>
+                <div class="btn-group">
+                    <a href="/logout" class="btn btn-primary ml-2" role="button">Log out</a>
+                </div>
+            </div>
+            <h1 style="margin-bottom: 20px">My Decks:</h1>
+            <div>
+                <p>
+                    <button id = "click" class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        add new deck
+                    </button>
+                </p>
+                <div class="collapse" id="collapseExample">
+                    <form novalidate ng-submit="addNewDeck()">
+                        <div class="mb-3">
+                            <label for="deckName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="deckName" ng-model="newDeck.name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="deckDescription" class="form-label">Description</label>
+                            <input type="text" class="form-control" id="deckDescription" ng-model="newDeck.description">
+                        </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button  id = "close-button" class="btn btn-primary" type="button" ng-click="closeDropdown()">close</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h1></h1>
+            <h6 style="color:darkgrey;margin:0;padding: 30px;display:inline">Search deck:</h6>
+            <input style="color:darkgrey;border: solid #ccc;margin:0;display:inline" ng-model="search.name"/>
+        </div>
+        <div class="card-body">
+    <table class="table table-hover">
+        <caption></caption>
+        <thead>
+        <tr>
+            <th scope="col">Name <button id="sort_name" type="button" class="btn btn-outline-info btn-sm" ng-click="sortName()"> ^ </button></th>
+            <th scope="col">Description <button id="sort_description" type="button" class="btn btn-outline-info btn-sm" ng-click="sortDescription()"> ^ </button></th>
+            <th scope="col"># new cards <button id="sort_amountOfNewCards" type="button" class="btn btn-outline-info btn-sm" ng-click="sortAmountOfNewCards()"> ^ </button></th>
+            <th scope="col"># cards to repeat <button id="sort_amountOfCardsToRepeat" type="button" class="btn btn-outline-info btn-sm" ng-click="sortAmountOfCardsToRepeat()"> ^ </button></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat = "d in decksList | filter:search |orderBy : pr">
+            <td><button title = "study deck" type="button" class="btn btn-success" ng-click="studyMode(d.deckId)">{{d.name}}</button></td>
+            <td>{{d.description}}</td>
+            <td>{{d.amountOfNewCards}}</td>
+            <td>{{d.amountOfCardsToRepeat}}</td>
+            <td><button type="button" class="btn btn-primary" ng-click="detailedView(d.deckId)">see detailed view</button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+1. Algorithm for learn service
+
+learning view
+
+
+Big things:
+- admins müssen decks sperren können
+- gesperrte decks in database (who suspended with Annotations)
+--> always check if deck is not suspended
+--> refactor all the searching / getting for decks
+
+
+For public decks:
+- if user wants to learn it he gets add to the user Set
+    - then gets his personal DeckAlgorithmData but cant edit the public deck
+    - only creator of the public deck can make changes
+
+- TODO: save creator of the deck
+
+- TODO: send email if deck gets suspended --> LUCA
+
+- TODO: attribute of the userDeckData if user wants to learn inverted
+
+- TODO: TESTS
+
+- liza's todos --> Lukas

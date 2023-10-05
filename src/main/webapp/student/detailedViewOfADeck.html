@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html data-ng-app="detailedView" xmlns="http://www.w3.org/1999/html" lang="en">
+<head>
+    <link rel="MainStyle" type="text/css" href="../css/MainStyle.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="../detailedViewController.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <title>MEMORI</title>
+</head>
+<body>
+<div class="container" data-ng-controller ="dvc">
+    <h1>MEMORI </h1>
+    <div class="card">
+        <div class="card-header">
+            <div class="col-md-12 bg-light text-right">
+                    <div class="btn-group">
+                        <button id="inverse_mode_button" type="button" class="btn btn-outline-warning" ng-click="inverse(deck.deckId)">inverse Mode</button>
+                    </div>
+                    <div class="btn-group">
+                        <button id = "edit_button" type="button" class="btn btn-primary" ng-click="edit_deck()">edit deck</button>
+                    </div>
+                    <div class="btn-group">
+                        <button id = "publish_button" type="button" class="btn btn-primary" ng-click="publishDeck(deck.deckId)">publish deck</button>
+                    </div>
+                    <div class="btn-group">
+                        <button id = "delete_button" type="button" class="btn btn-primary" ng-click="deleteDeck(deck.deckId)">delete deck</button>
+                    </div>
+                <div class="btn-group">
+                    <a href="/student/index.html" class="btn btn-primary ml-2" role="button">main</a>
+                </div>
+            </div>
+
+
+
+            <h2>
+                <label for="deck_name">Name : </label>
+                <input style="border:none;background: transparent" type="text" id="deck_name" value="{{deck.name}}"  readonly><br><br>
+                </h2>
+
+                <h3>
+                <label for="deck_description">Description : </label>
+                <input style="border:none;background: transparent" type="text" id="deck_description" value="{{deck.description}}" readonly><br><br>
+                </h3>
+
+
+                    <button style="display: none" id = "save_button" type="submit" class="btn btn-warning ml-2" ng-click="save_changes(deck.deckId)">save changes</button>
+        </div>
+        <div class="card-body">
+                <h3 style="margin-bottom: 20px">
+                    Cards:
+                </h3>
+                <div id = "add_form">
+                    <p>
+                        <button  id = "click" class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            add new card
+                        </button>
+                    </p>
+                    <div class="collapse" id="collapseExample">
+                        <form novalidate ng-submit="addNewCard(deck.deckId)">
+                            <div class="mb-3">
+                                <label for="cardQuestion" class="form-label">Question</label>
+                                <input type="text" class="form-control" id="cardQuestion" ng-model="newCard.question">
+                            </div>
+                            <div class="mb-3">
+                                <label for="cardSolution" class="form-label">Solution</label>
+                                <input type="text" class="form-control" id="cardSolution" ng-model="newCard.solution">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button  id = "close-button" class="btn btn-primary" type="button" ng-click="closeDropdown()">close</button>
+                        </form>
+                    </div>
+                </div>
+
+            <div style="margin-top: 10px">
+                <h6 style="color:darkgrey;display:inline;margin-top: 20px">Search question:</h6>
+                <input style="border: solid #ccc;margin-bottom: 10px;display:inline" ng-model="search.question"/>
+            </div>
+
+        <table id = "cards_table" class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Question <button id="sort_question" type="button" class="btn btn-outline-info btn-sm" ng-click="sortQuestion()"> ^ </button></th>
+                    <th scope="col">Solution <button id="sort_solution" type="button" class="btn btn-outline-info btn-sm" ng-click="sortSolution()"> ^ </button></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat = "c in cardsInDeck | filter:search | orderBy : pr">
+                    <td><input style="border:none;background: transparent" type="text" value="{{c.question}}" readonly></td>
+                    <td><input style="border:none;background: transparent" type="text" value="{{c.solution}}" readonly></td>
+                    <td><button id = "save_card_button" style="display: none" type="button" class="btn btn-warning" ng-click="save_edited_card(c.cardId,$index + 1)">save</button></td>
+                    <td><button id = "edit_card_button" type="button" class="btn btn-primary" ng-click="edit_card($index + 1)">edit</button></td>
+                    <td><button id = "delete_card_button" type="button" class="btn btn-primary" ng-click="deleteCardFromDeck(c.cardId)">delete</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    //taking parameter from url
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const isPublic = urlParams.get('public')
+    //if deck is public then not showing all the features to edit deck and cards in it
+    //because its not allowed by public decks, user need to add it to his decks
+    if(isPublic === "true"){
+        document.getElementById("save_card_button").style.display = "none";
+        document.getElementById("edit_card_button").style.display = "none";
+        document.getElementById("delete_card_button").style.display = "none";
+        document.getElementById("inverse_mode_button" ).style.display = "none";
+        document.getElementById("edit_button" ).style.display = "none";
+        document.getElementById("publish_button").style.display = "none";
+        document.getElementById("delete_button").style.display = "none";
+        document.getElementById("add_form").style.display = "none";
+    }
+</script>
+</body>
+</html>
